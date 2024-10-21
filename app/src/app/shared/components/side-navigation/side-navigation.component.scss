@@ -1,0 +1,428 @@
+$primary: #f8fafc;
+$primary-light: #f8fafc;
+$primary-lighter: #cbd5e1;
+$text-light: #204351;
+$text-on-primary: #204351;
+$hover-background: #cbd5e1;
+$hover-text: #204351;
+$badge-color: #204351;
+$nav-text-color: #204351;
+$icon-color: #204351;
+$focus-outline: #d6d6d6;
+
+$nav-width: 16rem;
+$nav-gutter: 1.5rem;
+$icon-width: 2rem;
+$icon-size: 1.25rem;
+$radius: 0.35rem;
+$radius-sm: 0.35rem;
+$timing: ease-out;
+$duration: 250ms;
+
+@mixin nav-button {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0;
+  background: none;
+  color: $text-light;
+  border: 0;
+  overflow: hidden;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  outline-offset: -2px;
+  transition-property: background, color;
+  transition-duration: $duration;
+
+  &:focus-visible {
+    outline: 2px solid $primary-lighter;
+  }
+
+  &:focus-visible,
+  &:hover {
+    background: $hover-background;
+    color: $hover-text;
+  }
+}
+
+@mixin icon {
+  height: $icon-width;
+  width: $icon-width;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: $icon-color !important;
+}
+
+@mixin label {
+  display: inline-block;
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition-property: opacity, transform;
+  transition-duration: $duration;
+  transition-timing-function: ease-out;
+  transition-delay: 100ms;
+
+  .is-collapsed & {
+    opacity: 0;
+    transform: translateX(1rem);
+    transition-delay: 0s;
+  }
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.side-nav {
+  display: flex;
+  flex-flow: column nowrap;
+  background: $primary;
+  color: $nav-text-color;
+  padding: $nav-gutter;
+  padding-top: 14px !important;
+  flex: 0 1 auto;
+  width: $nav-width;
+  max-width: 100%;
+  transition: width $duration $timing;
+  border-right: 1px solid #e2e8f0;
+  font-weight: 400;
+  &.is-collapsed {
+    width: $icon-width + ($nav-gutter * 2);
+  }
+}
+
+.is-active {
+  border-radius: 0.35rem !important;
+  font-weight: 600 !important;
+  background-color: $hover-background !important;
+}
+
+.main-nav-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: relative;
+}
+
+.header-icon {
+  @include icon;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+.header-text {
+  @include label;
+  color: $text-on-primary !important;
+  font-weight: 700;
+  flex: 1;
+}
+
+.main-nav-button {
+  @include nav-button;
+  color: $nav-text-color;
+  flex: 0 0 auto;
+  position: absolute;
+  left: 100%;
+}
+.main-nav-button:hover {
+  background-color: $hover-background !important;
+}
+
+.main-nav-button-icon {
+  @include icon;
+}
+
+.main-nav-button-text {
+  @include label;
+  font-weight: 700;
+  flex: 1;
+}
+
+.header-navigation .main-nav-button-icon {
+  width: auto;
+  color: $text-light;
+}
+
+.header-navigation .main-nav-button-icon > * {
+  transition-property: transform, color;
+  transition-duration: $duration;
+
+  &:hover {
+    color: $text-on-primary;
+  }
+
+  .is-collapsed & {
+    transform: rotate(180deg);
+  }
+}
+
+.search {
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.search-icon {
+  @include icon;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1 1 auto;
+  min-width: 1px;
+  height: $icon-width;
+  border: none;
+  background: $primary-lighter;
+  border-radius: $radius-sm;
+  color: $text-on-primary;
+  padding: 0 $icon-width 0 1rem;
+  outline-offset: -2px;
+  transition-property: background, color, padding;
+  transition-duration: $duration;
+
+  &:placeholder {
+    color: $text-on-primary !important;
+  }
+
+  &:focus {
+    outline: 2px solid $focus-outline;
+  }
+
+  .is-collapsed & {
+    color: transparent;
+    padding-left: 0;
+
+    &:not(:hover) {
+      background: none;
+    }
+  }
+}
+
+.nav-nav {
+  $offset: $nav-gutter - 0.125rem;
+  flex: 1 1 auto;
+  margin: 0 ($offset * -1) 0;
+  padding: 0 $offset;
+}
+
+.side-navigation {
+  $scroll-track: $primary-lighter;
+  $scroll-thumb: $text-light;
+  overflow: hidden;
+  overflow-y: auto;
+
+  @media (pointer: fine) {
+    scrollbar-color: $scroll-thumb transparent;
+    scrollbar-width: thin;
+    transition: scrollbar-color 200ms;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      transition: background 200ms;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $scroll-thumb;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background: none;
+    }
+
+    &:hover {
+      scrollbar-color: $scroll-thumb $scroll-track;
+      &::-webkit-scrollbar-track {
+        background: $scroll-track;
+      }
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-flow: column nowrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: $icon-width;
+}
+
+.nav-divider {
+  margin: 1rem 0;
+  padding: 0 calc(($icon-width - $icon-size) / 2);
+  min-width: $icon-width;
+
+  &::before {
+    display: block;
+    content: '';
+    height: 0.99px;
+    background: #e2e8f0 !important;
+  }
+}
+
+.nav-item {
+  position: relative;
+
+  & + & {
+    margin-top: 0.25rem;
+  }
+}
+
+.nav-button {
+  @include nav-button;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-icon {
+  @include icon;
+}
+
+.nav-label {
+  @include label;
+  margin-left: auto; // Pushes the label to the right
+  transition:
+    opacity 250ms ease-out,
+    transform 250ms ease-out;
+}
+
+.nav-badge {
+  border-radius: 50vh;
+  background: $badge-color;
+  color: #000;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.25rem;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 50%;
+  transform: translate(-0.25rem, -50%);
+  transition-property: transform, font-size, padding, color;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+
+  &.warn {
+    background: #ffbc00;
+  }
+
+  .is-collapsed & {
+    transform: translate(-0.25rem, 50%);
+    color: transparent;
+    font-size: 0;
+    padding: 0.25rem;
+  }
+}
+
+.main-nav-footer {
+  margin-top: 1rem;
+}
+
+.user-button {
+  @include nav-button;
+  border-radius: 50vh;
+  width: 100%;
+  max-width: 100%;
+  color: $text-on-primary;
+  //background-color: $primary-lighter !important;
+}
+
+.user-badge {
+  flex: 0 0 auto;
+  width: $icon-width;
+  height: $icon-width;
+  padding: 2px;
+  color: $primary;
+}
+
+.user-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background: #cfd8dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-text {
+  @include label;
+  margin-left: 0.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.user-name,
+.user-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-title {
+  font-size: 0.75rem;
+  color: $text-light;
+}
+.dropdown {
+  position: relative;
+}
+
+.accordion-item .accordion-content {
+  display: none;
+}
+
+.accordion-item .accordion-content.show {
+  display: block;
+}
+
+.caret-icon {
+  @include icon;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  transition: transform 250ms ease-out;
+
+  &.rotate {
+    transform: rotate(180deg);
+  }
+}
+
+.margin-adjustment {
+  margin-top: -18px !important;
+}
+
+// //override for stupid accordion height:
+
+.collapse[open] > :where(.collapse-content),
+.collapse-open > :where(.collapse-content),
+.collapse:focus:not(.collapse-close) > :where(.collapse-content),
+.collapse:not(.collapse-close)
+  > :where(input[type='checkbox']:checked ~ .collapse-content),
+.collapse:not(.collapse-close)
+  > :where(input[type='radio']:checked ~ .collapse-content) {
+  padding-bottom: 1rem !important;
+  padding-top: 0.25rem !important;
+  padding-left: 0 !important;
+}

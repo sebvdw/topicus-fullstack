@@ -1,0 +1,45 @@
+<div class="min-h-screen">
+  <div class="border border-amber-200 bg-white">
+    <div class="flex flex-col space-y-8 divide-y divide-gray-200">
+      <ng-container *ngIf="error; else content">
+        <div class="alert alert-error shadow-lg">
+          <div>
+            <span>{{ error }}</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #content>
+        <app-asset-upload-section
+          assetType="Favicon"
+          [assetHeight]="16"
+          [assetWidth]="16"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+        <app-asset-upload-section
+          assetType="Header"
+          [assetHeight]="512"
+          [assetWidth]="1920"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+        <app-asset-upload-section
+          assetType="Voortgangsbalk icoon"
+          [assetHeight]="60"
+          [assetWidth]="180"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+        <app-asset-upload-section
+          assetType="Logo"
+          [assetHeight]="35"
+          [assetWidth]="120"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+        <app-asset-upload-section
+          assetType="Laatste Stap"
+          [assetHeight]="334"
+          [assetWidth]="685"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+      </ng-template>
+    </div>
+  </div>
+</div>

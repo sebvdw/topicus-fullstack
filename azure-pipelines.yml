@@ -1,0 +1,78 @@
+pool:
+  name: Azure Pipelines
+  demands: npm
+
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
+variables:
+  RestoreBuildProjects: './api'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore tools'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'restore --tool-manifest ./api/.config/dotnet-tools.json'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '$(Parameters.RestoreBuildProjects)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '$(Parameters.RestoreBuildProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- script: |
+   cd api
+   dotnet tool run swagger tofile --output ../app/openapi.yaml ./bin/Release/net8.0/api.dll v1
+   cd ..
+  displayName: 'openapi generate .yaml'
+
+- powershell: |
+   cd app
+   
+   Invoke-WebRequest -OutFile openapi-generator-cli.jar https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.2.0/openapi-generator-cli-7.2.0.jar
+   
+   java -jar openapi-generator-cli.jar generate -i openapi.yaml -g typescript-angular -o src/app/core/api/v1
+   
+  displayName: 'openapi create api client'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: ./app
+    verbose: false
+
+- task: RaulARuiz.angular-cli-1.angular-cli-build-task.AngularCLI@1
+  displayName: 'ng build'
+  inputs:
+    project: ./app
+    arguments: '--configuration=production'
+    prod: false
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(Parameters.TestProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+  enabled: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
+
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()

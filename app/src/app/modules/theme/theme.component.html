@@ -1,0 +1,30 @@
+<main class="h-full w-full">
+  <h1 class="pl-14 pt-10 text-5xl">Theme</h1>
+  <div class="m-10 flex flex-row justify-center">
+    <form
+      class="flex h-full w-fit flex-col border-2 border-solid"
+      (ngSubmit)="submitTheme()">
+      <h2 class="mb-6 ml-5 mt-5 text-2xl">Web</h2>
+      <app-loader *ngIf="loadingWebTheme"></app-loader>
+      <div *ngIf="!loadingWebTheme" class="mx-5 flex flex-col gap-3">
+        <app-color-picker
+          name="Primary Color"
+          [(color)]="webTheme.primaryColor" />
+        <app-color-picker
+          name="Secondary Color"
+          [(color)]="webTheme.secondaryColor" />
+        <app-dropdown-select
+          name="Font"
+          [options]="fontsArray"
+          [(chosenOption)]="webTheme.fontName" />
+        <app-button
+          *ngIf="!submittingWebTheme"
+          class="m-4"
+          width="w-full"
+          buttonText="Submit"
+          type="submit" />
+        <app-loader *ngIf="submittingWebTheme" />
+      </div>
+    </form>
+  </div>
+</main>

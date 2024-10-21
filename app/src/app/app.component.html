@@ -1,0 +1,10 @@
+<div class="flex h-full">
+  <app-side-navigation
+    *ngIf="showNavigationBar"
+    class="flex-none"></app-side-navigation>
+  <div class="app-content flex-1 overflow-scroll">
+    <router-outlet></router-outlet>
+  </div>
+  <app-popup-modal id="error_modal" heading="Error" />
+  <app-popup-modal id="info_modal" title="Information" />
+</div>

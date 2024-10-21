@@ -1,0 +1,158 @@
+<div class="flex h-full flex-row">
+  <div class="h-full">
+    <div id="nav" class="side-nav h-full" [class.is-collapsed]="closed">
+      <header class="main-nav-header header-navigation">
+        <span class="header-icon" style="margin-left: 5px !important">
+          <img
+            src="../../../../assets/images/topicus_lizzard.png"
+            style="height: 2rem; width: 2rem"
+            alt="" />
+        </span>
+        <span class="header-text ml-2" style="color: #ffff">Topicus</span>
+        <button class="main-nav-button" aria-label="Expand">
+          <span class="main-nav-button-icon">
+            <i
+              class="fa-solid fa-angle-right"
+              aria-hidden="true"
+              (click)="toggleSideNav()"></i>
+          </span>
+        </button>
+      </header>
+      <div class="nav-divider"></div>
+      <nav class="nav-nav side-navigation">
+        <ul class="nav-list">
+          <li class="margin-adjustment collapse collapse-arrow">
+            <input
+              type="radio"
+              name="my-accordion-4"
+              checked="checked"
+              class="min-h-0" />
+            <div class="collapse-title min-h-0 pb-0 pl-0 pt-3">
+              <a class="nav-button text-decoration-none">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-font"></i>
+                </span>
+                <span class="nav-label">Translations</span>
+              </a>
+            </div>
+            <div class="collapse-content pb-0 pt-3">
+              <a
+                class="nav-button text-decoration-none"
+                routerLink="/translate">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">Web</span>
+              </a>
+              <a
+                class="nav-button text-decoration-none mt-1"
+                routerLink="/translatepdf">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">PDF</span>
+              </a>
+            </div>
+          </li>
+          <li class="margin-adjustment collapse collapse-arrow">
+            <input
+              type="radio"
+              name="my-accordion-4"
+              checked="checked"
+              class="min-h-0" />
+            <div class="collapse-title min-h-0 pb-0 pl-0 pt-3">
+              <a class="nav-button text-decoration-none">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-photo-film"></i>
+                </span>
+                <span class="nav-label">Assets</span>
+              </a>
+            </div>
+            <div class="collapse-content pb-0 pt-3">
+              <a
+                class="nav-button text-decoration-none"
+                routerLink="/assets-web">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">Web</span>
+              </a>
+              <a
+                class="nav-button text-decoration-none mt-1"
+                routerLink="/assets-pdf">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">PDF</span>
+              </a>
+            </div>
+          </li>
+          <li class="margin-adjustment collapse collapse-arrow">
+            <input
+              type="radio"
+              name="my-accordion-4"
+              checked="checked"
+              class="min-h-0" />
+            <div class="collapse-title min-h-0 pb-0 pl-0 pt-3">
+              <a class="nav-button text-decoration-none">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-palette"></i>
+                </span>
+                <span class="nav-label">Theme</span>
+              </a>
+            </div>
+            <div class="collapse-content pb-0 pt-3">
+              <a class="nav-button text-decoration-none" routerLink="/theme">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">Web</span>
+              </a>
+              <a
+                class="nav-button text-decoration-none mt-1"
+                routerLink="/theme-pdf">
+                <span class="nav-icon">
+                  <i class="fa-solid fa-equals"></i>
+                </span>
+                <span class="nav-label">PDF</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+        <div class="nav-divider"></div>
+        <ul class="nav-list" v-role="'Sys Admin'">
+          <li class="nav-item">
+            <a class="nav-button text-decoration-none">
+              <span class="nav-icon">
+                <i class="fa-solid fa-gear"></i>
+              </span>
+              <span class="nav-label">Settings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/example" class="nav-button text-decoration-none">
+              <span class="nav-icon">
+                <i class="fa-solid fa-code"></i>
+              </span>
+              <span class="nav-label">EXAMPLE</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="main-nav-footer user">
+        <button class="user-button" (click)="onLogoutButtonClicked()">
+          <div class="user-badge">
+            <div class="user-image">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+          </div>
+          <div class="user-text">
+            <span class="user-name">LOGGED IN USER</span>
+            <span class="user-title">CURRENT MUNICIPALITY</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

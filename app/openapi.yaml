@@ -1,0 +1,696 @@
+openapi: 3.0.1
+info:
+  title: TopicusApi
+  version: v1
+paths:
+  '/api/asset/{fileName}':
+    get:
+      tags:
+        - Asset
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - Asset
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/asset:
+    get:
+      tags:
+        - Asset
+      parameters:
+        - name: ignoreTags
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - Asset
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '200':
+          description: OK
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticatedResponse'
+  /api/contactmodule:
+    get:
+      tags:
+        - ContactModule
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - ContactModule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+      responses:
+        '200':
+          description: OK
+    put:
+      tags:
+        - ContactModule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Translation'
+      responses:
+        '200':
+          description: OK
+  /api/example:
+    get:
+      tags:
+        - Example
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+  /api/example/translation:
+    get:
+      tags:
+        - Example
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Translation'
+  /api/example/user:
+    get:
+      tags:
+        - Example
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - Example
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  '/api/example/user/{id}':
+    get:
+      tags:
+        - Example
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - Example
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - Example
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/example/images:
+    get:
+      tags:
+        - Example
+      responses:
+        '200':
+          description: OK
+  /api/municipality:
+    get:
+      tags:
+        - Municipality
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Municipality'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Municipality'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Municipality'
+  /api/password-reset/send-email:
+    post:
+      tags:
+        - PasswordReset
+      parameters:
+        - name: address
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /api/password-reset/set-new-password:
+    put:
+      tags:
+        - PasswordReset
+      parameters:
+        - name: email
+          in: query
+          schema:
+            type: string
+        - name: password
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/theme:
+    get:
+      tags:
+        - Theme
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+    put:
+      tags:
+        - Theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+    post:
+      tags:
+        - Theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+  /api/theme/pdf:
+    get:
+      tags:
+        - Theme
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+    put:
+      tags:
+        - Theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ThemeInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+  /api/theme/css:
+    get:
+      tags:
+        - Theme
+      parameters:
+        - name: file
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - Theme
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '200':
+          description: OK
+  /api/translation:
+    get:
+      tags:
+        - Translation
+      parameters:
+        - name: file
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - Translation
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    AuthenticatedResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Font:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Municipality:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        code:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Test:
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Theme:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        primaryColor:
+          type: string
+          nullable: true
+        secondaryColor:
+          type: string
+          nullable: true
+        isDefault:
+          type: boolean
+        municipalityId:
+          type: integer
+          format: int32
+        fontId:
+          type: integer
+          format: int32
+          nullable: true
+        font:
+          $ref: '#/components/schemas/Font'
+        isPDF:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ThemeInput:
+      type: object
+      properties:
+        fontName:
+          type: string
+          nullable: true
+        primaryColor:
+          type: string
+          nullable: true
+        secondaryColor:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Translation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        body:
+          type: string
+          nullable: true
+        privacyStatement:
+          type: string
+          nullable: true
+        municipalityId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        email:
+          type: string
+          nullable: true
+        hashPassword:
+          type: string
+          nullable: true
+        municipalityId:
+          type: integer
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Please enter token
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

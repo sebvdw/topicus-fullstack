@@ -1,0 +1,11 @@
+<div class="flex items-center gap-6 px-5">
+  <label for="dropdown" class="text-l w-32">{{ name }}: </label>
+  <select
+    class="block flex-grow rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+    [(ngModel)]="chosenOption"
+    (change)="onChange()">
+    <option *ngFor="let option of options" [value]="option">
+      {{ option }}
+    </option>
+  </select>
+</div>

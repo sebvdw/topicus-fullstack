@@ -1,0 +1,9 @@
+<dialog
+  #dialogElement
+  class="rounded border border-solid border-black p-6 backdrop:backdrop-blur">
+  <div class="flex flex-col">
+    <h2 class="text-3xl font-bold">{{ heading }}</h2>
+    <p class="m-3 text-xl">{{ message }}</p>
+    <app-button class="self-end" buttonText="Close" (clickEvent)="close()" />
+  </div>
+</dialog>

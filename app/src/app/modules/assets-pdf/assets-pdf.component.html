@@ -1,0 +1,27 @@
+<div class="min-h-screen">
+  <div class="border border-amber-200 bg-white">
+    <div class="flex flex-col space-y-8 divide-y divide-gray-200">
+      <ng-container *ngIf="error; else content">
+        <div class="alert alert-error shadow-lg">
+          <div>
+            <span>{{ error }}</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #content>
+        <app-asset-upload-section
+          assetType="Voorpagina"
+          [assetHeight]="794"
+          [assetWidth]="1123"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+        <app-asset-upload-section
+          assetType="Algemene gegevens"
+          [assetHeight]="794"
+          [assetWidth]="748"
+          [assets]="assets"
+          [isLoading]="isLoading"></app-asset-upload-section>
+      </ng-template>
+    </div>
+  </div>
+</div>

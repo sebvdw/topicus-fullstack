@@ -1,0 +1,49 @@
+<div class="container mx-auto flex flex-col items-center p-8 lg:flex-row">
+  <div class="features mb-8 lg:mb-0 lg:w-1/2">
+    <h1 class="mb-2 break-words text-center text-3xl font-bold lg:text-left">
+      Welcome to the Management Portal
+    </h1>
+    <p class="mb-3 text-center text-lg text-gray-700 lg:text-left">
+      Discover the features and capabilities of our application below.
+    </p>
+    <div class="grid grid-cols-1 gap-2">
+      <div class="bg-white p-6">
+        <h2 class="mb-2 text-2xl font-semibold">Upload Images</h2>
+        <p class="text-gray-700">
+          Upload and manage your images through the assets tab. Easily add
+          favicons, headers, logos, and more to customize your application and
+          PDF file.
+        </p>
+      </div>
+      <div class="bg-white p-6">
+        <h2 class="mb-2 text-2xl font-semibold">Change Text</h2>
+        <p class="text-gray-700">
+          Use the translations tab to update and manage the text content in your
+          application and PDF. Ensuring that your messages are relevant to your
+          audience.
+        </p>
+      </div>
+      <div class="bg-white p-6">
+        <h2 class="mb-2 text-2xl font-semibold">Customize Theme</h2>
+        <p class="text-gray-700">
+          Change the color theme and font of your application through the theme
+          tab. Personalize the look and feel to match your municipality.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        routerLink="/assets-management"
+        class="rounded bg-blue-600 px-4 py-2 font-bold text-white transition hover:bg-blue-700">
+        Get Started
+      </a>
+    </div>
+  </div>
+  <div class="image flex justify-center lg:w-1/2 lg:justify-end lg:pl-8">
+    <img
+      src="../../assets/images/home.png"
+      alt="Home Image"
+      class="h-auto w-full rounded-lg" />
+  </div>
+</div>
